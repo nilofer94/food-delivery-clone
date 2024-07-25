@@ -1,4 +1,9 @@
-.header{
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* .header{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -92,4 +97,4 @@ overflow: hidden;
 .login{
     padding: 0px 20px;
     cursor: pointer;
-}
+} */

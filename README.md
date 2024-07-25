@@ -118,3 +118,6 @@ Server Side Routing - It makes a network call and refreshes the whole page when 
 # Dynamic Routing
 
 path:"/restaurant/:redId"
+
+# HOC
+Function that takes a component returns a component.Takes an existing component and enhances it and returns the new component.
