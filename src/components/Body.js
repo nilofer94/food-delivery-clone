@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withDiscountCard } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 
 const Body = () =>{
     const [listOfRestaurants,setListOfRestaurants] = useState([]);
     const [filteredRestaurants,setFilteredRestaurants] = useState([]);
-    const [searchText,setSeachText] = useState("")
+    const [searchText,setSeachText] = useState("");
+    const DiscountedRestaurantCard = withDiscountCard(RestaurantCard)
 
     useEffect(()=>{
         fetchData()
@@ -22,24 +23,26 @@ const Body = () =>{
    
 
     return(<div className="body">
-        <div className="filter">
-            <div className="search">
-                <input type="text" className="search-box" value={searchText} onChange={(e)=>setSeachText(e.target.value)}/>
-                <button onClick={()=>{
+        <div className="filter flex items-center">
+            <div className="m-4 p-4">
+                <input type="text" className="border border-solid border-black rounded-lg px-2" value={searchText} onChange={(e)=>setSeachText(e.target.value)}/>
+                <button className="bg-green-100 mx-4 px-4 cursor-pointer rounded-lg" onClick={()=>{
                     let filteredSearchList = listOfRestaurants.filter(res=>res.info.name.toLowerCase().includes(searchText.toLowerCase()));
                     setFilteredRestaurants(filteredSearchList)
                 }}>Search</button>
             </div>
-            <button className="filter-btn" onClick={()=>{
+            <div>
+            <button className="px-4 bg-gray-50 cursor-pointer rounded-lg" onClick={()=>{
                 let filteredList = listOfRestaurants.filter(res=>res.info.avgRating > 4);
                 setListOfRestaurants(filteredList)
             }}>Top Rated Restaurants</button>
+            </div>
         </div>
-            <div className="res-container">
+            <div className="res-container flex flex-wrap">
                 {filteredRestaurants.length===0?<Shimmer/>:filteredRestaurants.map((resItem)=>
                     (<Link key={resItem.info.id}
                          to={"/restaurant/"+resItem.info.id}>
-                            <RestaurantCard resData={resItem.info} />
+                            {resItem.info.aggregatedDiscountInfoV3 ? <DiscountedRestaurantCard resData={resItem.info} /> : <RestaurantCard resData={resItem.info} />}
                             </Link>)
                 )}
         </div>

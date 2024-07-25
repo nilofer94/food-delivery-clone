@@ -118,3 +118,33 @@ Server Side Routing - It makes a network call and refreshes the whole page when 
 # Dynamic Routing
 
 path:"/restaurant/:redId"
+
+# SRP(Single Responsibility Principle)
+
+Any piece of code (class/functional compoennt) should serve a single responsibility
+Modularity - breaking code into different modules.So that code becomes managable and testable.
+
+# Performance optimisation
+
+To break down app into a smaller chunks
+
+- chunking
+- dynamic bundling
+- code splitting
+- lazy loading
+- on demand loading
+  Syntax: lazy(()=>import("../../componentName))
+  React suspends the rendering when the request will bw made to lazy loaded component.When we load the home page, the lazy loaded component will not be loaded. when we try to move to the lazy loaded component,the browser takes some ms to fetch the component.At that time, React suspends the rendering.
+  To solve this, we will have to warp our component inside Suspend.We have to give the suspend a placeholder/fallback to render while the lazy loaded component is fully rendered.
+  <Suspense fallback={ <h1>Loading...</h1> } />
+
+# Style
+
+- sass
+- chakra UI
+- Ant design
+- Material UI
+- bootstrap
+- styled components
+- Tailwind CSS
+  npm install -D tailwindcss postcss
