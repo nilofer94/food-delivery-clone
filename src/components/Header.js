@@ -6,25 +6,27 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Header = () =>{
     const[isLogin,setLogin] = useState(false);
-    const onlineStatus = useOnlineStatus()
+    const isOnline = useOnlineStatus()
     return (
-    <div className="flex justify-between items-center border-b-4 border-gray-100sss">
-        <div className="logo-container">
-        <img className="w-32" src={LOGO_URL} alt="logo"/>
+    <div className="flex justify-between items-center px-8 py-4 mb-4 shadow-xl font-semibold ">
+        <div className="logo-container cursor-pointer">
+        <Link to="/"> 
+        <img className="w-20" src={LOGO_URL} alt="logo"/>
+        </Link>
+        
         </div>
-        <div className="nav-items">
-        <ul className="flex p-4 m-4">
-            <li className="px-4">Home</li>
-            <li className="px-4">
+        <div>
+        <ul className="flex">
+            <li className="px-4">Online Status : {isOnline?"✔":"🛑"}</li>
+            <li className="px-4 cursor-pointer hover:text-orange-500">Home</li>
+            <li className="px-4 cursor-pointer hover:text-orange-500">
             <Link to="/about">About Us</Link>
             </li>
-            <li className="px-4">
+            <li className="px-4 cursor-pointer hover:text-orange-500">
             <Link to="/contact">Contact Us</Link>
             </li>
-            <li className="px-4">Cart</li>
-            <li className="px-4"><Link to="/grocery">Grocery</Link></li>
-            <li className="px-4">{onlineStatus? "🟢" : "🔴"}</li>
-            <button className="login" onClick={()=>{setLogin(!isLogin)}}>{isLogin?"Logout":"Login"}</button>
+            <li className="px-4 cursor-pointer hover:text-orange-500">Cart</li>
+            <button className="login px-4 hover:text-orange-500" onClick={()=>{setLogin(!isLogin)}}>{isLogin?"Logout":"Login"}</button>
         </ul>
 
         </div>

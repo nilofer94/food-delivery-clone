@@ -4,23 +4,23 @@ import { CDN_URL } from "../utils/constants";
 const RestaurantCard = (props) =>{
     const {resData} = props;
     const {name,avgRating,cuisines,locality} = resData
-   return(<div className="m-4 p-4 w-[250] bg-blue-50 rounded-lg">
-    <img className="res-logo rounded-lg h-full w-full" src={CDN_URL + resData.cloudinaryImageId} alt="res-img"/>
-       <h3 className="res-card-name pt-2 text-ellipsis overflow-hidden whitespace-break-spaces font-bold">{name}</h3> 
-       <h4>{avgRating}</h4>
-       <h4 className="res-card-cuisine text-ellipsis overflow-hidden whitespace-break-spaces">{cuisines.join(",")}</h4>
-       <h4>{locality.toLowerCase()}</h4>
+return(<div className="w-[200] p-4 m-4 bg-blue-50 rounded-lg transition ease delay-100  hover:scale-90 duration-100">
+      <img className="rounded-xl h-[170] w-full" src={CDN_URL + resData.cloudinaryImageId} alt="res-img"/>
+       <h3 className="font-bold pt-4 overflow-hidden whitespace-nowrap text-ellipsis">{name}</h3> 
+       <h4 className="overflow-hidden whitespace-nowrap text-ellipsis">{avgRating}</h4>
+       <h4 className="overflow-hidden whitespace-nowrap text-ellipsis">{cuisines.join(",")}</h4>
+       <h4 className="overflow-hidden whitespace-nowrap text-ellipsis">{locality.toLowerCase()}</h4>
     </div>)
 }
 
-export const withDiscountCard = (props) =>{
+export const withDiscountLabel = (RestaurantCard)=>{
     return (props)=>{
-        return (
-        <div className="relative">
-            <label className="absolute top-1/2 text-white font-bold pl-10 overflow-hidden whitespace-nowrap text-ellipsis">{props?.resData.aggregatedDiscountInfoV3.header + " " + props?.resData.aggregatedDiscountInfoV3.subHeader}</label>
-            <RestaurantCard {...props} />
-        </div>
-            )
+        return(
+            <div className="relative">
+                <label className="absolute text-white font-bold top-1/2 px-10 overflow-hidden whitespace-nowrap text-ellipsis">{props.resData.aggregatedDiscountInfoV3.header +" " + props.resData.aggregatedDiscountInfoV3.subHeader}</label>
+                <RestaurantCard {...props}/>
+            </div>
+        )
     }
 }
 
