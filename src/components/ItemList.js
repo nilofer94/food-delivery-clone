@@ -1,10 +1,20 @@
-import { DISH_IMAGE_URL } from "../utils/constants"
+import { addItem } from "../utils/cartSlice";
+import { DISH_IMAGE_URL } from "../utils/constants";
+import { useDispatch } from "react-redux"
 
 const ItemList = ({items}) =>{
+    const dispatch = useDispatch()
+    
+    
+    const handleItems = (item)=>{
+      dispatch(addItem(item))
+    }
+    
+    
     return(
         <div>
            {items.map(item=>{
-                return(<div id={item?.card?.info?.id} className="flex justify-between items-center py-4 my-4 border-b border-black-100 last:border-b-0">
+                return(<div key={item?.card?.info?.id} className="flex justify-between items-center py-4 my-4 border-b border-black-100 last:border-b-0">
                      <div className="flex flex-col w-9/12">
                         <div className="text-lg font-semibold ">
                         {item.card.info.name}
@@ -24,8 +34,18 @@ const ItemList = ({items}) =>{
                             {item.card.info.description}
                         </div>
                     </div>
+                    
                     <div className="px-4 w-3/12">
+                   
+                    <div className="relative">
                       <img className="rounded-xl h-32 w-full object-cover" alt={item.card.info.name} src={DISH_IMAGE_URL + "/" + item.card.info.imageId} />
+                      <div className="absolute w-full -bottom-3">
+                        <div className="flex justify-center">
+                      <button className="bg-white shadow-lg text-center px-8 py-1 rounded-lg text-green-600 text-lg font-extrabold hover:bg-gray-300"
+                      onClick={()=>handleItems(item)}>ADD</button>
+                    </div>
+                    </div>
+                    </div>
                     </div>
                 </div>)
            })} 

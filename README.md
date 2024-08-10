@@ -119,6 +119,81 @@ Server Side Routing - It makes a network call and refreshes the whole page when 
 
 path:"/restaurant/:redId"
 
-# HOC
+# SRP(Single Responsibility Principle)
+
+Any piece of code (class/functional compoennt) should serve a single responsibility
+Modularity - breaking code into different modules.So that code becomes managable and testable.
+
+# Performance optimisation
+
+To break down app into a smaller chunks
+
+- chunking
+- dynamic bundling
+- code splitting
+- lazy loading
+- on demand loading
+  Syntax: lazy(()=>import("../../componentName))
+  React suspends the rendering when the request will bw made to lazy loaded component.When we load the home page, the lazy loaded component will not be loaded. when we try to move to the lazy loaded component,the browser takes some ms to fetch the component.At that time, React suspends the rendering.
+  To solve this, we will have to warp our component inside Suspend.We have to give the suspend a placeholder/fallback to render while the lazy loaded component is fully rendered.
+  <Suspense fallback={ <h1>Loading...</h1> } />
+
+# Style
+
+- sass
+- chakra UI
+- Ant design
+- Material UI
+- bootstrap
+- styled components
+- Tailwind CSS
+  npm install -D tailwindcss postcss
+
+  # HOC
 
 Function that takes a component returns a component.Takes an existing component and enhances it and returns the new component.
+
+# Context vs Redux
+
+context - small application - comes with react itself
+Redux - large application - have to install additional npm package
+
+# Redux
+
+Redux offers great solution - handling data, managing store
+Our app becomes easier to debug( chrome extensions available)
+Zustand is also a library like Redux
+2 packages
+React-Redux
+Redux Toolkit (RTK)
+
+- React-Redux is a bridge between React n Redux
+- Redux toolkit is from Redux (new way of writing Redux code)
+
+# Redux Store
+
+- Big JS object with lot of data in it, kept in global central place.Amy component can access/modify data in it
+  Slices - parts of redux store(logiacl partitions)
+
+  On clicking, the component DISPTACHES an ACTION
+  |
+  Calls a function - REDUCER
+  |
+  Modifies the SLICE of the redux store
+  |
+  SELECTOR will read data from Store (Subscribing to the store)
+  |
+  It modifies the data in the component
+
+# Installation
+
+npm i @reduxjs/toolkit and react-redux
+Build STORE
+Connect store to application
+Create a SLICE
+DISPATCH an action
+Read the data using SELECTOR
+
+# Build Store
+
+configureStore from redux/toolkit

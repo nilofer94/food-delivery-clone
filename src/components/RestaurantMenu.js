@@ -1,3 +1,4 @@
+import { useState } from "react";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import NestedRestaurantCategory from "./NestedRestaurantCategory";
 import RestaurantCategory from "./RestaurantCategory";
@@ -5,7 +6,11 @@ import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 
 const RestaurantMenu = () =>{
-const {resId} = useParams()
+const {resId} = useParams();
+const [showItems,setShowItems] = useState(null);
+const handleShowItems = (title) =>{
+setShowItems(title)
+}
 const resInfo = useRestaurantMenu(resId)
     if(resInfo === null)
     return <Shimmer/>
@@ -21,7 +26,8 @@ const resInfo = useRestaurantMenu(resId)
             {categories.map(
               (category) => {
                 return(category?.card?.card?.["@type"].includes("NestedItemCategory")?
-                <NestedRestaurantCategory data={category?.card.card}/>:<RestaurantCategory data={category?.card.card}/>
+                <NestedRestaurantCategory data={category?.card?.card} key={category?.card?.card?.title} showItems={showItems} handleShowItems={handleShowItems}/>
+                :<RestaurantCategory data={category?.card.card} key={category?.card?.card?.title} showItems={showItems} handleShowItems={handleShowItems}/>
               )
               }
             )}
